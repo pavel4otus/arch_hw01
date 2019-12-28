@@ -34,7 +34,9 @@ image::datamodel.png[]
 - *controller*  контроллеры. В настоящее время наружу выведены контроллеры Country,User, Good, WareHouse
 - *security*    Для авторизации используется basic-авторизация
 
+Все методы GET для Country, Good, WareHouse открыты для всех
 
+Остальные методы открыты только для администратора системы
 
 
 *Доступ к БД*
@@ -42,7 +44,9 @@ image::datamodel.png[]
 База данных доступна по ссылке http://localhost:8082/h2-console[localhost:8082/h2-console]
 
 url   jdbc:h2:mem:testdb
+
 Пользователь sa
+
 Пароль не установлен
 
 
