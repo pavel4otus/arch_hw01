@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,19 +22,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity webSecurity){
-        webSecurity.ignoring().antMatchers( "/");
+        webSecurity
+                .ignoring().antMatchers( "/");
     }
 
 
     @Override
     public void configure(HttpSecurity http) throws Exception{
         http
+                .sessionManagement()
+                .sessionCreationPolicy( SessionCreationPolicy.STATELESS)
+                .and()
                 .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
 
                 .authorizeRequests()
-                    .antMatchers( "/").permitAll()
+                //    .antMatchers( "/").permitAll()
                     .antMatchers( "/h2-console").permitAll()
                     //
                     // страны могут просматривать все, изменять только админ
