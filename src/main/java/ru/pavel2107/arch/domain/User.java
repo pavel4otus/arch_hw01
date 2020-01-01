@@ -39,7 +39,5 @@ public class User {
     @OneToMany( mappedBy = "user")
     private Set<Order> orders = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn( name = "address_id")
-    private Address address;
+    private String address;
 }

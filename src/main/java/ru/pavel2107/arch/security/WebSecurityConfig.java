@@ -37,18 +37,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .logout()
-                //.logoutUrl("/perform_logout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .and()
                 .authorizeRequests()
                     .antMatchers( "/h2-console").permitAll()
                     //
-                    // страны могут просматривать все, изменять только админ
+                    // бренды могут просматривать все, изменять только админ
                     //
-                    .antMatchers( HttpMethod.GET, "/rest/country").permitAll()
-                    .antMatchers( HttpMethod.DELETE, "/rest/country").hasRole( "ADMIN")
-                    .antMatchers( HttpMethod.PUT, "/rest/country").hasRole( "ADMIN")
+                    .antMatchers( HttpMethod.GET, "/rest/brands").permitAll()
+                    .antMatchers( HttpMethod.DELETE, "/rest/brands").hasRole( "ADMIN")
+                    .antMatchers( HttpMethod.PUT, "/rest/brands").hasRole( "ADMIN")
+                    //
+                    // бренды могут просматривать все, изменять только админ
+                    //
+                    .antMatchers( HttpMethod.GET, "/rest/categories").permitAll()
+                    .antMatchers( HttpMethod.DELETE, "/rest/categories").hasRole( "ADMIN")
+                    .antMatchers( HttpMethod.PUT, "/rest/categories").hasRole( "ADMIN")
                     //
                     // товары могут просматривать все, изменять только admin
                     //

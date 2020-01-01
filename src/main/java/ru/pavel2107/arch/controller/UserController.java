@@ -52,7 +52,12 @@ public class UserController {
 
     @PostMapping( value = "/rest/users/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public User register( @RequestBody User user) throws Exception{
-        User newUser = service.registerNewUser( user);
+
+        User newUser = service.findByEmail( user.getEmail());
+        if( newUser != null){
+            throw new RuntimeException( "User with email " + user.getEmail() + " already exists");
+        }
+        newUser = service.registerNewUser( user);
         return newUser;
     }
 
